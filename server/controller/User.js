@@ -80,3 +80,24 @@ exports.login = async(req,res)=>{
         })
     }
 }
+exports.getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        console.log(req.user._id, user._id);
+        if (user._id.toString() !== req.user._id.toString()) {
+            res.status(401).json({
+                success: false,
+                message: "Unauthorized"
+            })
+        }
+        res.status(200).json({
+            success: true,
+            user
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
