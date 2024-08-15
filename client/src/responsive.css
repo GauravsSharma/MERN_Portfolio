@@ -1,0 +1,526 @@
+@media screen and (max-width: 900px) {
+    .profile {
+        display: none;
+    }
+    .min_heading {
+        margin-top: 2vw;
+        font-size: 2.2vw;
+    }
+    .info {
+        width: 100%;
+    }
+
+    .info>h1 {
+        font-size: 6vw;
+    }
+
+    .info>p {
+        font-size: 2.2vw;
+    }
+
+    .about {
+        flex-direction: column-reverse;
+    }
+
+    .about_me {
+        width: 100%;
+    }
+
+    .about_me>h1 {
+        font-size: 5vw;
+    }
+
+    .skills {
+        width: 100%;
+    }
+
+    .skill_cart {
+        padding: 2vw;
+    }
+
+    .skill_name>h3 {
+        font-size: 2.3vw;
+    }
+
+    .skill_icon {
+        width: 4vw;
+        height: 4vw;
+        font-size: 25px;
+    }
+
+    .project_container {
+        flex-wrap: wrap;
+    }
+
+    .project_cart {
+        width: 32vw;
+    }
+
+    .project_cart>img {
+        height: 26vw;
+    }
+
+    .project_title {
+        color: #a5a5a5;
+        font-size: 2.5vw;
+    }
+
+    .project_dis {
+        font-size: 1.7vw;
+        line-height: 2.5vw;
+    }
+
+    .about_me>div {
+        padding: 21px;
+    }
+
+    .about_me>p {
+        font-size: 17px;
+    }
+
+    .contact_form {
+        width: 48%;
+    }
+
+    .profilePic {
+        width: 100%;
+    }
+
+    .profilePic>img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .skills_main>h1 {
+        font-weight: 500;
+        margin-top: 4vw;
+    }
+
+    .skill_container {
+        margin-top: 5vw;
+
+    }
+
+    .skillcart {
+        height: 8vw;
+        width: 18vw;
+    }
+
+    .skills_main {
+        height: auto;
+        padding-top: 2vw;
+        padding-bottom: 10vw;
+    }
+
+    .about {
+        padding-top: 5vw;
+        padding-bottom: 10vw;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .skill_cart {
+        width: 100%;
+        padding: 3vw;
+    }
+
+    .project_cart {
+        width: 48%;
+    }
+
+    .main_head>h2 {
+        font-weight: 500;
+        font-size: 4.5vw;
+    }
+
+    .quote_div p {
+        font-size: 2.4vw;
+    }
+
+    .footer>h1 {
+        font-size: 3.2vw;
+    }
+
+    .footer>h3 {
+        font-size: 2.5vw;
+    }
+
+    .header>div>ul {
+        display: none;
+    }
+
+    .skillcart {
+        height: 12vw;
+        width: 24vw;
+    }
+
+    form {
+        width: 80%;
+        margin-bottom: 18vw;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .header>ul>li>a, 
+    .header>ul>li>span{
+        display: none;
+    }
+
+    .icon {
+        font-size: 21px;
+    }
+
+    .header>ul {
+        gap: 4vw;
+    }
+
+    .mobile_header {
+        height: 58px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: rgb(45, 45, 45);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1vw 4vw;
+        width: 92%;
+        border-top: 2px solid rgb(68 68 68);
+        transition: all 0.5s easy;
+
+    }
+    .active>div {
+        border-radius: 50%;
+        background: rgb(24, 24, 25);
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+    }
+
+    .profile {
+        display: flex;
+        width: 100%;
+    }
+
+    .profile_pic {
+        height: 17rem;
+        width: 17rem;
+    }
+
+    .hero {
+        flex-direction: column-reverse;
+        height: auto;
+        padding-top: 5vw;
+        padding-bottom: 14vw;
+    }
+
+    .mongo {
+        left: -37px;
+        height: 3.5rem;
+        width: 3.5rem;
+    }
+
+    .node {
+        bottom: -37px;
+        right: 33px;
+        height: 5rem;
+        width: 5rem;
+    }
+
+    .info>p {
+        font-size: 4vw;
+        margin-top: 5vw;
+    }
+
+    .info {
+        margin-top: 5vw;
+    }
+
+     
+    .mobile_header>a.active{
+        color: #64f4acea;
+      }
+    .mobile_header>a.active span{
+        top: 64%;
+      }
+      .active>div{
+        margin-bottom: 18px;
+      }
+    
+    .padding {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    .about_page {
+        padding-top: 15vw;
+        padding-bottom: 15vw;
+    }
+
+    .header>div>h1 {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .about_page>p {
+        font-size: 14px;
+    }
+
+    .min_heading {
+        margin: 8vw 0;
+        font-size: 4.5vw;
+    }
+
+    .profilePic {
+        width: 100%;
+    }
+
+    .profilePic>img {
+        width: 100%;
+    }
+
+    .skills_main>h1 {
+        margin-top: 8vw;
+        font-size: 7vw;
+        text-align: center;
+    }
+
+    .skillcart {
+        height: auto;
+        width: auto;
+        padding: 3vw 8vw;
+    }
+
+    .skill_container {
+        margin-top: 10vw;
+        gap: 6vw;
+    }
+
+    .add_btn {
+        font-size: 6vw;
+    }
+
+    .skills_main {
+        height: auto;
+    }
+
+    .about_page>h1 {
+        font-size: 11vw;
+        font-weight: 400;
+    }
+
+    .about_page>p {
+        font-size: 18px;
+    }
+
+    .quote {
+        padding-top: 12vw;
+        padding-bottom: 15vw;
+    }
+
+    .about {
+        padding-top: 5vw;
+        padding-bottom: 10vw;
+    }
+
+    .skills_main {
+        padding-bottom: 10vw;
+    }
+
+    .footer {
+        padding-bottom: 26vw;
+        padding-top: 10vw;
+    }
+
+    .projects {
+        padding-bottom: 15vw;
+    }
+
+    .pt-10 {
+        padding-top: 10vw;
+    }
+
+    .skillcart>img {
+        height: 10vw;
+        width: 10vw;
+    }
+
+    .sendmssg {
+        bottom: 22vw;
+        height: 70px;
+        width: 70px;
+        font-size: 42px;
+    }
+
+    .admin_name {
+        font-size: 3vw;
+    }
+    .contact_form {
+        right: 3vw;
+    }
+
+    .copyright {
+        font-size: 3vw;
+    }
+
+    .footer>h1 {
+        font-size: 7.2vw;
+    }
+
+    .footer>h3 {
+        font-size: 5vw;
+        margin-top: 5vw;
+    }
+
+    .poweredby {
+        margin-top: 10vw;
+    }
+
+    .quote>.main_head {
+        justify-content: center;
+        gap: 1vw;
+        flex-direction: column;
+    }
+
+    .main_head>h2 {
+        font-size: 8.5vw;
+    }
+
+    .contact_form {
+        width: 80%;
+    }
+
+    form>h1 {
+        font-weight: 500;
+        font-size: 7vw;
+    }
+
+    .quote_div p {
+        font-size: 4vw;
+        line-height: 6vw;
+    }
+
+    .star {
+        color: #64f4acea;
+        font-size: 3vw;
+    }
+
+    .quote_icon {
+        font-size: 8vw;
+    }
+
+    .quote_div>.heading {
+        margin-bottom: 6vw;
+    }
+
+    .project_cart {
+        width: 100%;
+    }
+
+    .project_cart>img {
+        height: 45vw;
+    }
+
+    .project_title {
+        font-size: 5.5vw;
+    }
+
+    .project_dis {
+        font-size: 3.5vw;
+        line-height: 5.5vw;
+    }
+
+    .project_info {
+        padding: 3vw;
+    }
+
+    .project_container {
+        gap: 6.5vw
+    }
+
+    .project_stack>div>span {
+        font-size: 15px;
+    }
+
+    .view {
+        font-size: 15px
+    }
+
+    .heading>h4 {
+        font-size: 5vw;
+    }
+
+    .heading {
+        margin-top: -3vw;
+        margin-bottom: 7vw;
+    }
+
+    .skill_name>h3 {
+        font-size: 4.3vw;
+    }
+
+    .skill_icon {
+        width: 7vw;
+        height: 7vw;
+        font-size: 33px;
+    }
+
+    .flex {
+        gap: 2vw;
+    }
+
+    .image_input {
+        width: 23%;
+    }
+
+    .common_input {
+        width: 60%;
+    }
+
+    .common_input {
+        width: 72%;
+    }
+
+    .w-50 {
+        width: 45%;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    .gap-4 {
+        gap: 4vw;
+    }
+
+    .dialogbox {
+        align-items: center;
+    }
+
+    form {
+        margin-top: 6vw;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .flex-col {
+        flex-direction: column;
+    }
+
+    .common_input {
+        width: 100%;
+    }
+
+    .image_input {
+        width: 100%;
+    }
+
+    .quote_div {
+        margin-top: 15vw;
+        padding: 7vw;
+    }
+}

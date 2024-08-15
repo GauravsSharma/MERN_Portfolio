@@ -1,0 +1,13 @@
+ <div className='common_input'>
+                <label>Technologies</label>
+                <Select
+                  options={options}
+                  isMulti
+                  name="technologies"
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  styles={customStyles}
+                  onChange={(selectedOptions) => setFieldValue('technologies', selectedOptions)}
+                />
+                <ErrorMessage name="technologies" component={ErrorComponent} />
+              </div>
