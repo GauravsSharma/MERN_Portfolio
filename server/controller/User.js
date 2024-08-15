@@ -35,7 +35,8 @@ exports.register = async (req, res) => {
         }
         return res.status(200).cookie("token", token, options).json({
             success: true,
-            user
+            user,
+            token
         })
 
     } catch (error) {
@@ -69,7 +70,8 @@ exports.login = async(req,res)=>{
         }
         return res.status(200).cookie("token", token, options).json({
             success: true,
-            user
+            user,
+            token
         })
 
 

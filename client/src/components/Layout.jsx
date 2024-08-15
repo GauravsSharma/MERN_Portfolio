@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import   Footer from './Footer';
 import MobileHeader from   '../components/MobileHeader';
-
+import axios from 'axios';
+axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 export const LoginContext = createContext();
 export const AuthContext = createContext();
 
@@ -13,7 +14,13 @@ const Layout = () => {
   const styleForLogin = {
     top: isloginFormOpen ? '40%' : '102%',
   };
-
+ const loadUser = async()=>{
+  try {
+    const data = await axios.get("getuser")
+  } catch (error) {
+    
+  }
+ }
   return (
     <AuthContext.Provider value={{user,setUser}}>
     <LoginContext.Provider value={{ isloginFormOpen, setIsloginFormOpen, styleForLogin }}>
