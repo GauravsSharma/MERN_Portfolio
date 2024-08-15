@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { GiCrossedBones } from "react-icons/gi";
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000/api/v1';
+axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 const Login = ({ stIsloginFormOpen, style }) => {
   const [loading, setLoading] = useState(false);
