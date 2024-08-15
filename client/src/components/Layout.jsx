@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { json, Outlet } from 'react-router-dom';
 import Header from './Header';
 import   Footer from './Footer';
 import MobileHeader from   '../components/MobileHeader';
@@ -14,24 +14,35 @@ const Layout = () => {
   const styleForLogin = {
     top: isloginFormOpen ? '40%' : '102%',
   };
- const loadUser = async()=>{
-  try {
-    const data = await axios.get("getuser")
-  } catch (error) {
-    
-  }
- }
+  const loadUser = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      if (token) {
+        const {data} = await axios.get("/getuser", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUser(data.user);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(()=>{
+    loadUser()
+  },[])
   return (
-    <AuthContext.Provider value={{user,setUser}}>
-    <LoginContext.Provider value={{ isloginFormOpen, setIsloginFormOpen, styleForLogin }}>
+    <AuthContext.Provider value={{ user, setUser }}>
+    <LoginContext.Provider value={{ isloginFormOpen, setIsloginFormOpen , styleForLogin}}>
       <div className="layout">
-        <Header />
+        <Header /> {/* Header is inside both LoginContext and AuthContext providers */}
         <Outlet />
         <Footer />
         <MobileHeader />
       </div>
     </LoginContext.Provider>
-    </AuthContext.Provider>
+  </AuthContext.Provider>
   );
 };
 

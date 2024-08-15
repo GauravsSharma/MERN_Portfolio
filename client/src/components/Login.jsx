@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Field, ErrorMessage, Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { GiCrossedBones } from "react-icons/gi";
 import axios from 'axios';
-
+import {AuthContext} from "./Layout"
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 const Login = ({ stIsloginFormOpen, style }) => {
   const [loading, setLoading] = useState(false);
-
+  const {setUser,user} = useContext(AuthContext)
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('Invalid email address')
@@ -25,11 +25,13 @@ const Login = ({ stIsloginFormOpen, style }) => {
   const loginInUser = async (email, password) => {
     try {
       setLoading(true);
-      const response = await axios.post("/login", {
+      const { data } = await axios.post("/login", {
         email,
         password
       });
-      console.log(response.data); // Assuming the response contains user data here
+      setUser(data.user)
+      localStorage.setItem("token", JSON.stringify(data.token));
+
     } catch (error) {
       console.log(error.message);
     } finally {

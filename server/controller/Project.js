@@ -1,14 +1,22 @@
 const Project = require("../models/Project")
 const User = require("../models/User")
+const cloudinary = require("cloudinary").v2
 
 exports.addProject = async (req, res) => {
     try {
         const { title, github, livelink, avatar, techstack } = req.body;
+        const myCloud = await cloudinary.uploader.upload(avatar, {
+            folder: "projects"
+         });
         const newProject = await Project.create({
             title,
             github,
             livelink,
-            techstack
+            techstack,
+            thumnail: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+             },
         })
         const user = await User.findById(req.user._id)
         user.projects.push(newProject._id);

@@ -5,8 +5,10 @@ import { SiLeetcode } from "react-icons/si";
 import { LuLogIn } from "react-icons/lu";
 import { Link } from 'react-router-dom';
 import { LoginContext } from './Layout';
+import { AuthContext } from './Layout';
 const Header = () => {
-  const {setIsloginFormOpen } = useContext(LoginContext);
+  const { setIsloginFormOpen } = useContext(LoginContext);
+  const { user } = useContext(AuthContext);
   return (
     <div className='header padding'>
       <div>
@@ -19,26 +21,28 @@ const Header = () => {
       </div>
       <ul>
         <li>
-          <SiLeetcode className='icon'/>
+          <SiLeetcode className='icon' />
           <a href="">Leetcode</a>
         </li>
         <li>
-          <FaLinkedin  className='icon'/>
+          <FaLinkedin className='icon' />
           <a href="">Linkdin</a>
         </li>
         <li>
-          <FaGithub  className='icon'/>
+          <FaGithub className='icon' />
           <a href="">Github</a>
         </li>
-        <li
-        onClick={()=>setIsloginFormOpen(true)}
-        style={{cursor:"pointer"}}
-        >
-          <LuLogIn  className='icon'/>
-          <span>Login</span>
-        </li>
+        {
+          !user && <li
+            onClick={() => setIsloginFormOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <LuLogIn className='icon' />
+            <span>Login</span>
+          </li>
+        }
       </ul>
-      
+
     </div>
   )
 }

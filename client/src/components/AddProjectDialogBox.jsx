@@ -3,6 +3,9 @@ import { FaPlus } from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
+import axios from 'axios';
+import { AuthContext } from "./Layout"
+axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 const ErrorComponent = ({ children }) => (
   <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
@@ -62,15 +65,15 @@ const options = [
   // Add more options as needed
 ];
 
-const AddProjectDialogBox = ({isDialogBocOpen,setIsDialogBoxOpen}) => {
+const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
   const [image, setImage] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const handleImageBoxClick = () => {
     document.getElementById('imageUpload').click();
   };
- const stopRropogation=(e)=>{
-  e.stopPropagation();
- }
+  const stopRropogation = (e) => {
+    e.stopPropagation();
+  }
   const handleImageChange = (event, setFieldValue) => {
     const file = event.target.files[0];
     if (file) {
@@ -92,8 +95,29 @@ const AddProjectDialogBox = ({isDialogBocOpen,setIsDialogBoxOpen}) => {
     technologies: Yup.array().min(1, 'Select at least one technology').required('Technologies are required')
   });
 
+  const addProject = async (
+    title, dispcription, github, livelink, avatar, techstack
+  ) => {
+    setLoading(true);
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const { data } = await axios.post("/addproject", {
+        title, dispcription, github, livelink, avatar, techstack
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+      setLoading(false)
+    }
+  }
   return (
-    <div className='dialogbox' onClick={()=>setIsDialogBoxOpen(false)}>
+    <div className='dialogbox' onClick={() => setIsDialogBoxOpen(false)}>
       <Formik
         initialValues={{
           title: '',
@@ -104,8 +128,19 @@ const AddProjectDialogBox = ({isDialogBocOpen,setIsDialogBoxOpen}) => {
           technologies: []
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={async (values, { resetForm }) => {
+          setImage(null);
+          const techstack = values.technologies.map(({ value }) => value)
+          await addProject(
+            values.title,
+            values.description,
+            values.githubUrl,
+            values.liveLink,
+            values.image,
+            techstack
+          )
+
+          resetForm()
         }}
       >
         {({ setFieldValue }) => (
@@ -168,8 +203,8 @@ const AddProjectDialogBox = ({isDialogBocOpen,setIsDialogBoxOpen}) => {
                 <ErrorMessage name="title" component={ErrorComponent} />
               </div>
             </div>
-            <div className="submitbtn">
-            <button type="submit">Submit</button>
+            <div className="submitbtn" >
+              <button type="submit" disabled={loading}>Submit</button>
             </div>
           </Form>
         )}
