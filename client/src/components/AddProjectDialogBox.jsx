@@ -131,12 +131,14 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
         onSubmit={async (values, { resetForm }) => {
           setImage(null);
           const techstack = values.technologies.map(({ value }) => value)
+          console.log(techstack);
+          
           await addProject(
             values.title,
             values.description,
             values.githubUrl,
             values.liveLink,
-            values.image,
+            image,
             techstack
           )
 

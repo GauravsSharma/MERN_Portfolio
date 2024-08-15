@@ -26,7 +26,7 @@ exports.addProject = async (req, res) => {
             project: newProject
         })
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             success: false,
             mesage: error.message
         })
