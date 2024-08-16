@@ -1,12 +1,21 @@
 const Skill = require("../models/Skill")
 const User = require("../models/User")
+const cloudinary = require("cloudinary").v2
 
 exports.addSkill = async (req, res) => {
     try {
         const { skill_name, avatar } = req.body;
-        const newSkill = await Skill.create({
-            skill_name,     
-        })
+        const myCloud = await cloudinary.uploader.upload(avatar, {
+            folder: "skills"
+         });
+         const skill = {
+            skill_name,
+            avatar:{
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            }
+         }
+        const newSkill = await Skill.create(skill);
         const user = await User.findById(req.user._id)
         user.skills.push(newSkill._id);
         await user.save();
@@ -24,26 +33,49 @@ exports.addSkill = async (req, res) => {
 exports.updateSkill = async (req, res) => {
     try {
         const { skill_name, avatar } = req.body;
+        
+        // Find the skill by ID
+        const skill = await Skill.findById(req.params.id);
+        if (!skill) {
+            return res.status(404).json({
+                success: false,
+                message: "Skill not found"
+            });
+        }
 
-        const skill = await Skill.findById(req.params.id)
+        // Update the skill name if provided
         if (skill_name) {
             skill.skill_name = skill_name;
         }
-        // if (avatar) {
-        //     project.github = github;
-        // }
-        await skill.save()
+
+        // If an avatar is provided, delete the old one from Cloudinary and upload the new one
+        if (avatar) {
+            if (skill.avatar && skill.avatar.public_id) {
+                await cloudinary.uploader.destroy(skill.avatar.public_id);
+            }
+            const myCloud = await cloudinary.uploader.upload(avatar, {
+                folder: "skills"
+            });
+            skill.avatar = {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            };
+        }
+
+        // Save the updated skill
+        await skill.save();
+
         return res.status(200).json({
             success: true,
             message: "Skill updated"
-        })
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: error
-        })
+            message: error.message
+        });
     }
-}
+};
 
 exports.deleteSkill = async (req, res) => {
     try {

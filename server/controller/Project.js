@@ -36,8 +36,16 @@ exports.updateProject = async (req, res) => {
     try {
         const { title, github, livelink, avatar, techstack } = req.body;
         console.log(req.params.id);
-        
-        const project = await Project.findById(req.params.id)
+
+        // Find the project by ID
+        const project = await Project.findById(req.params.id);
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found"
+            });
+        }
+        // Update fields if they are provided
         if (title) {
             project.title = title;
         }
@@ -45,26 +53,44 @@ exports.updateProject = async (req, res) => {
             project.github = github;
         }
         if (livelink) {
-            project.livelink = livelink
+            project.livelink = livelink;
         }
         if (techstack) {
             project.techstack = techstack;
         }
-        // if(avatar){
+        
+        // If an avatar is provided, delete the old one from Cloudinary and upload the new one
+        if (avatar) {
+            // Delete the old avatar from Cloudinary
+            if (project.avatar && project.avatar.public_id) {
+                await cloudinary.uploader.destroy(project.avatar.public_id);
+            }
 
-        // }
-        await project.save()
+            // Upload the new avatar to Cloudinary
+            const myCloud = await cloudinary.uploader.upload(avatar, {
+                folder: "projects"
+            });
+            project.avatar = {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            };
+        }
+
+        // Save the updated project
+        await project.save();
+
         return res.status(200).json({
             success: true,
             message: "Project updated"
-        })
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: error
-        })
+            message: error.message
+        });
     }
-}
+};
+
 
 exports.deleteProject = async (req, res) => {
     try {

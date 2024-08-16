@@ -116,6 +116,7 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
       setLoading(false)
     }
   }
+ 
   return (
     <div className='dialogbox' onClick={() => setIsDialogBoxOpen(false)}>
       <Formik
