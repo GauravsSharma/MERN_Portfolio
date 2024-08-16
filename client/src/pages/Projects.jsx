@@ -8,6 +8,7 @@ axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const Projects = () => {
   const [isDialogBocOpen,setIsDialogBoxOpen] = useState(false);
   const [projects, setProjects] = useState(null);
+  const [currentProject, setCurrentProject] = useState(null);
   const scaleInCardAnimation = {
     initial: {      
       opacity:0,
@@ -39,7 +40,10 @@ const Projects = () => {
   useEffect(()=>{
     getProjects()
   },[])
-
+  const handleAddClick = () => {
+    setCurrentProject(null); // Reset to null when adding a new project
+    setIsDialogBoxOpen(true);
+  };
   return (
     <div className='projects'>
       <PageHeader
@@ -59,17 +63,22 @@ const Projects = () => {
              livelink = {project.livelink}
              thumbnail = {project?.thumnail?.url}
              dis = {project?.discription}
+             id={project?._id}
+             setIsDialogBoxOpen={setIsDialogBoxOpen}
+             setCurrentProject={setCurrentProject}
              />
           ))}
         {
         isDialogBocOpen&&<AddProjectDialogBox setIsDialogBoxOpen={setIsDialogBoxOpen}
         isDialogBocOpen={isDialogBocOpen}
+        currentProject={currentProject}
+        getProjects={getProjects}
         />
       }
       </div>
       <div className='padding add_btn_div'>
         <button className='add_btn'
-        onClick={()=>setIsDialogBoxOpen(true)}
+        onClick={handleAddClick}
         ><FaPlus /></button>
       </div>
      

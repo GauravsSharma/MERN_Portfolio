@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaPlus } from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -6,6 +6,7 @@ import Select from 'react-select';
 import axios from 'axios';
 import { Toaster, toast } from 'sonner'
 import FormLoader from './loaders/FormLoader';
+import { AuthContext } from './Layout';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 const ErrorComponent = ({ children }) => (
@@ -71,9 +72,10 @@ const options = [
   // Add more options as needed
 ];
 
-const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
-  const [image, setImage] = useState(null);
+const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects}) => {
+  const [image, setImage] = useState(currentProject?.thumbnail);
   const [loading, setLoading] = useState(false);
+  const {projectId} = useContext(AuthContext)
   const handleImageBoxClick = () => {
     document.getElementById('imageUpload').click();
   };
@@ -97,8 +99,13 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
     description: Yup.string().required('Description is required'),
     githubUrl: Yup.string().url('Invalid URL').required('Github URL is required'),
     liveLink: Yup.string().url('Invalid URL').required('Live link is required'),
-    image: Yup.mixed().required('Image is required'),
-    technologies: Yup.array().min(1, 'Select at least one technology').required('Technologies are required')
+    image: Yup.mixed().test('image-required', 'Image is required', function(value) {
+      if (currentProject) {
+        return value || image;  // Accept either a file or an existing image URL
+      }
+      return value;  // Only accept a file for new projects
+    }),
+    technologies: Yup.array().min(1, 'Select at least one technology').required('Technologies are required'),
   });
 
   const addProject = async (
@@ -118,6 +125,30 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
       )
       setLoading(false)
       toast.success("Project added")
+      getProjects()
+    } catch (error) {
+      console.log(error);
+      setLoading(false)
+    }
+  }
+  const updateProject = async(
+    title, dispcription, github, livelink, avatar, techstack
+  )=>{
+    setLoading(true);
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const { data } = await axios.put(`/updateProject/:${currentProject.id}`, {
+        title, dispcription, github, livelink, avatar, techstack
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      setLoading(false)
+      toast.success("Project updated")
+      getProjects()
     } catch (error) {
       console.log(error);
       setLoading(false)
@@ -127,33 +158,45 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
   return (
     <div className='dialogbox' onClick={() => setIsDialogBoxOpen(false)}>
       <Formik
-        initialValues={{
-          title: '',
-          description: '',
-          githubUrl: '',
-          liveLink: '',
-          image: null,
-          technologies: []
-        }}
+          initialValues={{
+            title: currentProject?.title || "",
+            description: currentProject?.dis || "",
+            githubUrl: currentProject?.github || "",
+            liveLink: currentProject?.livelink || "",
+            image: currentProject?.thumbnail || null,  // Set to URL if available
+            technologies: currentProject?.techstack?.map((tech) => ({ value: tech, label: tech })) || []
+          }}
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
           setImage(null);
           const techstack = values.technologies.map(({ value }) => value)
           console.log(techstack);
           
-          await addProject(
-            values.title,
-            values.description,
-            values.githubUrl,
-            values.liveLink,
-            image,
-            techstack
-          )
+          if(currentProject){
+            await updateProject(
+              currentProject.title,
+              currentProject.description,
+              currentProject.githubUrl,
+              currentProject.liveLink,
+              image,
+              techstack
+            )
+          }
+          else{
+            await addProject(
+              values.title,
+              values.description,
+              values.githubUrl,
+              values.liveLink,
+              image,
+              techstack
+            )
+          }
 
           resetForm()
         }}
       >
-        {({ setFieldValue }) => (
+        {({ setFieldValue,values }) => (
           <Form onClick={stopRropogation}>
             {/* <h1>Add Project</h1> */}
             <div className='input_container'>
@@ -186,6 +229,7 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
                     classNamePrefix="select"
                     styles={customStyles}
                     onChange={(selectedOptions) => setFieldValue('technologies', selectedOptions)}
+                    value={values.technologies}
                   />
                   <ErrorMessage name="technologies" component={ErrorComponent} />
                 </div>

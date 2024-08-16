@@ -11,6 +11,7 @@ export const AuthContext = createContext();
 const Layout = () => {
   const [isloginFormOpen, setIsloginFormOpen] = useState(false);
   const [user,setUser] = useState(null);
+  const [projectId,setProjectId] = useState(null);
   const styleForLogin = {
     top: isloginFormOpen ? '40%' : '102%',
   };
@@ -33,7 +34,7 @@ const Layout = () => {
     loadUser()
   },[])
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser,projectId,setProjectId }}>
     <LoginContext.Provider value={{ isloginFormOpen, setIsloginFormOpen , styleForLogin}}>
       <div className="layout">
         <Header /> {/* Header is inside both LoginContext and AuthContext providers */}

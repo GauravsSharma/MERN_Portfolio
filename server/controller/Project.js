@@ -60,7 +60,12 @@ exports.updateProject = async (req, res) => {
     try {
         const { title, github, livelink, avatar, techstack ,discription} = req.body;
         console.log(req.params.id);
-
+        if (!mongoose.Types.ObjectId.isValid(projectId)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid project ID"
+            });
+        }
         // Find the project by ID
         const project = await Project.findById(req.params.id);
         if (!project) {
@@ -69,6 +74,7 @@ exports.updateProject = async (req, res) => {
                 message: "Project not found"
             });
         }
+
         // Update fields if they are provided
         if (title) {
             project.title = title;
@@ -102,10 +108,8 @@ exports.updateProject = async (req, res) => {
                 url: myCloud.secure_url
             };
         }
-
         // Save the updated project
         await project.save();
-
         return res.status(200).json({
             success: true,
             message: "Project updated"
