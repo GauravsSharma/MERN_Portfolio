@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Toaster, toast } from 'sonner'
 import FormLoader from './loaders/FormLoader';
 import { AuthContext } from './Layout';
-axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
+// axios.defaults.baseURL = 'http://localhost:5173/api/v1';
 
 const ErrorComponent = ({ children }) => (
   <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
@@ -131,13 +131,15 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
       setLoading(false)
     }
   }
+  console.log(currentProject);
+  
   const updateProject = async(
     title, dispcription, github, livelink, avatar, techstack
   )=>{
     setLoading(true);
     try {
       const token = JSON.parse(localStorage.getItem("token"));
-      const { data } = await axios.put(`/updateProject/:${currentProject.id}`, {
+      const { data } = await axios.put(`http://localhost:5173/api/v1/updateProject/${currentProject.id}`, {
         title, dispcription, github, livelink, avatar, techstack
       },
         {
@@ -174,10 +176,10 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
           
           if(currentProject){
             await updateProject(
-              currentProject.title,
-              currentProject.description,
-              currentProject.githubUrl,
-              currentProject.liveLink,
+              values.title,
+              values.description,
+              values.githubUrl,
+              values.liveLink,
               image,
               techstack
             )
@@ -192,7 +194,6 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
               techstack
             )
           }
-
           resetForm()
         }}
       >

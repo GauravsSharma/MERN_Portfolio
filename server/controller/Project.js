@@ -58,8 +58,9 @@ exports.getAllProjects = async (req, res) => {
 
 exports.updateProject = async (req, res) => {
     try {
-        const { title, github, livelink, avatar, techstack ,discription} = req.body;
+        const {title, dispcription, github, livelink, avatar, techstack} = req.body;
         console.log(req.params.id);
+        title, dispcription, github, livelink, avatar, techstack
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({
                 success: false,
@@ -82,8 +83,8 @@ exports.updateProject = async (req, res) => {
         if (github) {
             project.github = github;
         }
-        if(discription){
-            project.discription = discription;
+        if(dispcription){
+            project.discription = dispcription;
         }
         if (livelink) {
             project.livelink = livelink;
@@ -94,16 +95,18 @@ exports.updateProject = async (req, res) => {
 
         // If an avatar is provided, delete the old one from Cloudinary and upload the new one
         if (avatar) {
+            
             // Delete the old avatar from Cloudinary
-            if (project.avatar && project.avatar.public_id) {
-                await cloudinary.uploader.destroy(project.avatar.public_id);
+            if (project.thumnail && project.thumnail.public_id) {
+                console.log();
+                await cloudinary.uploader.destroy(project.thumnail.public_id);
             }
 
             // Upload the new avatar to Cloudinary
             const myCloud = await cloudinary.uploader.upload(avatar, {
                 folder: "projects"
             });
-            project.avatar = {
+            project.thumnail = {
                 public_id: myCloud.public_id,
                 url: myCloud.secure_url
             };
