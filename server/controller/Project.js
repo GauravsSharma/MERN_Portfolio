@@ -60,7 +60,7 @@ exports.updateProject = async (req, res) => {
     try {
         const { title, github, livelink, avatar, techstack ,discription} = req.body;
         console.log(req.params.id);
-        if (!mongoose.Types.ObjectId.isValid(projectId)) {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({
                 success: false,
                 message: "Invalid project ID"
