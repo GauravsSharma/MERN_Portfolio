@@ -1,7 +1,7 @@
 const Project = require("../models/Project")
 const User = require("../models/User")
 const cloudinary = require("cloudinary").v2
-
+const mongoose = require('mongoose');
 exports.addProject = async (req, res) => {
     try {
         const { title, github, livelink, avatar, techstack,discription } = req.body;
