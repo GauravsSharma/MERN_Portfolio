@@ -9,6 +9,12 @@ const skillSchema = new mongoose.Schema({
         public_id: String,
         url: String,
     },
+    owner:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
 })
 
 module.exports = mongoose.model("Skill", skillSchema)

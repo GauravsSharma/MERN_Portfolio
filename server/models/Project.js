@@ -5,6 +5,10 @@ const projectSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    discription:{
+      type:String,
+      require:true
+    },
     github: {
         type: String,
         require: true

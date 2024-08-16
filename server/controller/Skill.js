@@ -13,7 +13,8 @@ exports.addSkill = async (req, res) => {
             avatar:{
                 public_id: myCloud.public_id,
                 url: myCloud.secure_url
-            }
+            },
+            owner:req.user._id
          }
         const newSkill = await Skill.create(skill);
         const user = await User.findById(req.user._id)

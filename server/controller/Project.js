@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2
 
 exports.addProject = async (req, res) => {
     try {
-        const { title, github, livelink, avatar, techstack } = req.body;
+        const { title, github, livelink, avatar, techstack,discription } = req.body;
         const myCloud = await cloudinary.uploader.upload(avatar, {
             folder: "projects"
         });
@@ -12,6 +12,7 @@ exports.addProject = async (req, res) => {
             title,
             github,
             livelink,
+            discription,
             techstack,
             thumnail: {
                 public_id: myCloud.public_id,
@@ -57,7 +58,7 @@ exports.getAllProjects = async (req, res) => {
 
 exports.updateProject = async (req, res) => {
     try {
-        const { title, github, livelink, avatar, techstack } = req.body;
+        const { title, github, livelink, avatar, techstack ,discription} = req.body;
         console.log(req.params.id);
 
         // Find the project by ID
@@ -74,6 +75,9 @@ exports.updateProject = async (req, res) => {
         }
         if (github) {
             project.github = github;
+        }
+        if(discription){
+            project.discription = discription;
         }
         if (livelink) {
             project.livelink = livelink;
