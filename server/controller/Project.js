@@ -7,7 +7,7 @@ exports.addProject = async (req, res) => {
         const { title, github, livelink, avatar, techstack } = req.body;
         const myCloud = await cloudinary.uploader.upload(avatar, {
             folder: "projects"
-         });
+        });
         const newProject = await Project.create({
             title,
             github,
@@ -16,7 +16,8 @@ exports.addProject = async (req, res) => {
             thumnail: {
                 public_id: myCloud.public_id,
                 url: myCloud.secure_url
-             },
+            },
+            owner: req.user._id
         })
         const user = await User.findById(req.user._id)
         user.projects.push(newProject._id);
@@ -32,6 +33,28 @@ exports.addProject = async (req, res) => {
         })
     }
 }
+exports.getAllProjects = async (req, res) => {
+    try {
+        const page_no = parseInt(req.params.page_no, 10) || 1;
+        const limit = 8;
+        const skip = (page_no - 1) * limit;
+
+        const projects = await Project.find({ owner: req.user._id }).skip(skip).limit(limit);
+
+        return res.status(200).json({
+            success: true,
+            projects,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while fetching projects.',
+            error: error.message || error,
+        });
+    }
+};
+
+
 exports.updateProject = async (req, res) => {
     try {
         const { title, github, livelink, avatar, techstack } = req.body;
@@ -58,7 +81,7 @@ exports.updateProject = async (req, res) => {
         if (techstack) {
             project.techstack = techstack;
         }
-        
+
         // If an avatar is provided, delete the old one from Cloudinary and upload the new one
         if (avatar) {
             // Delete the old avatar from Cloudinary

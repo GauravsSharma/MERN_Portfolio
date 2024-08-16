@@ -76,7 +76,20 @@ exports.updateSkill = async (req, res) => {
         });
     }
 };
-
+exports.getAllSkills = async(req,res)=>{
+    try {
+       const skills = await Skill.find({owner:req.user._id})
+       return res.statue(200).json({
+         success:true,
+         skills
+       })
+    } catch (error) {
+       res.status(500).json({
+         success:false,
+         message:error
+       })
+    }
+ }
 exports.deleteSkill = async (req, res) => {
     try {
         // Find the project by ID

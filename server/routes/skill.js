@@ -1,9 +1,11 @@
 const express = require("express");
 const { isAuthenticated } = require("../middleware/auth");
-const { addSkill, updateSkill, deleteSkill } = require("../controller/Skill");
+const { addSkill, updateSkill, deleteSkill, getAllSkills } = require("../controller/Skill");
 const router = express.Router();
 
 router.route("/addSkill").post(isAuthenticated,addSkill);
+
+router.route("/getAllSkills").get(isAuthenticated,getAllSkills);
 
 router.route("/updateSkill/:id").put(isAuthenticated,updateSkill);
 

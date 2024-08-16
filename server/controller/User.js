@@ -1,6 +1,4 @@
 const User = require("../models/User")
-const cloudinary = require("cloudinary").v2
-
 
 exports.register = async (req, res) => {
     try {

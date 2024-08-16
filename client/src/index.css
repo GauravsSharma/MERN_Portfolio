@@ -776,6 +776,9 @@ form>h1 {
   width: 100%;
   font-weight: 400;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact_form {

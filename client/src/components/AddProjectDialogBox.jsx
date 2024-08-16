@@ -4,7 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
 import axios from 'axios';
-import { AuthContext } from "./Layout"
+import { Toaster, toast } from 'sonner'
+import FormLoader from './loaders/FormLoader';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 const ErrorComponent = ({ children }) => (
@@ -62,6 +63,11 @@ const options = [
   { value: 'javascript', label: 'JavaScript' },
   { value: 'typescript', label: 'TypeScript' },
   { value: 'nodejs', label: 'Node.js' },
+  { value: 'firebase', label: 'firebase' },
+  { value: 'express', label: 'express' },
+  { value: 'bootstrap', label: 'bootstrap' },
+  { value: 'mongodb', label: 'mongodb' },
+  { value: 'socket.io', label: 'socket.io' },
   // Add more options as needed
 ];
 
@@ -111,6 +117,7 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
         }
       )
       setLoading(false)
+      toast.success("Project added")
     } catch (error) {
       console.log(error);
       setLoading(false)
@@ -207,11 +214,14 @@ const AddProjectDialogBox = ({ isDialogBocOpen, setIsDialogBoxOpen }) => {
               </div>
             </div>
             <div className="submitbtn" >
-              <button type="submit" disabled={loading}>Submit</button>
+              <button type="submit" disabled={loading}>
+                {loading?<FormLoader/>:"Submit"}
+              </button>
             </div>
           </Form>
         )}
       </Formik>
+      <Toaster position="bottom-center" richColors/>
     </div>
   );
 }
