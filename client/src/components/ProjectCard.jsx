@@ -1,7 +1,23 @@
 import { FaArrowRight } from "react-icons/fa6";
-import React from 'react'
+import React, { useContext } from 'react'
 import { motion } from 'framer-motion';
-const ProjectCard = ({ index, fadeInAnimationVariants }) => {
+import { FaGithub } from "react-icons/fa";
+import { AiOutlineEdit } from "react-icons/ai";
+import { MdDeleteOutline } from "react-icons/md";
+import {Link} from "react-router-dom"
+import {AuthContext} from "../components/Layout"
+const ProjectCard = ({ 
+    index, 
+    fadeInAnimationVariants,
+    title ,
+    github ,
+    techstack ,
+    livelink ,
+    thumbnail ,
+    dis 
+}) => {
+    console.log(thumbnail);
+    const {user} = useContext(AuthContext)
     return (
         <motion.div className='project_cart'
             variants={fadeInAnimationVariants}
@@ -9,24 +25,31 @@ const ProjectCard = ({ index, fadeInAnimationVariants }) => {
             whileInView="animate"
             custom={index}
         >
-            <img src="https://images.unsplash.com/photo-1576158114254-3ba81558b87d?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+            <img src={thumbnail} alt="" />
             <div className='project_info'>
-                <p className='project_title'>BaayMax</p>
+                <p className='project_title'>{title}</p>
                 <p className="project_dis">
-                    Generate developer portfolio site from your github profile.
-
+                   {dis}
                 </p>
                 <div className="project_stack">
                     <div className="w-90">
-                        <span>react</span>
-                        <span>nodejs</span>
-                        <span>tailwind</span>
-
+                       {techstack?.map((lang,idx)=>(
+                        <span key={idx}>{lang}</span>
+                       ))}
                     </div>
                     <div className='view'>View
                         <FaArrowRight className="view_icon" />
                     </div>
                 </div>
+            </div>
+            <div className="deleteupdate">
+                <Link to={github}> <FaGithub className="icone"/></Link>
+                {
+                    user && <>
+                       <AiOutlineEdit className="icone"/>
+                       <MdDeleteOutline className="icone"/>
+                    </>
+                }
             </div>
         </motion.div>
     )

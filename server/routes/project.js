@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route("/addproject").post(isAuthenticated,addProject);
 
-router.route("/getprojects/:page_no").get(isAuthenticated,getAllProjects);
+router.route("/getprojects/:page_no").get(getAllProjects);
 
 router.route("/updateProject/:id").put(isAuthenticated,updateProject);
 

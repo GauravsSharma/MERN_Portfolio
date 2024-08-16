@@ -339,23 +339,45 @@
   margin-top: 4vw;
   position: relative;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .project_cart {
   height: auto;
-  width: 20vw;
+  width: 26vw;
   background: rgb(45 46 50);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 20px 0px;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
+  cursor: pointer;
 }
-
+.deleteupdate{
+  transition: all 0.3s ease;
+  position: absolute;
+  height: 15%;
+  width: 100%;
+  background: #000000ab;
+  z-index:100;
+  top: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.project_cart:hover .deleteupdate{
+  top: 85%;
+}
 .project_cart>img {
   height: 18vw;
   width: 100%;
   object-fit: cover;
 }
-
+.icone{
+  font-size: 2vw;
+  color: white;
+}
 .project_info {
   height: auto;
   display: flex;
@@ -367,12 +389,26 @@
 }
 
 .project_title {
-  color: gray;
+  color: rgb(219, 219, 219);
+  font-weight: 500;
 }
 
 .project_dis {
   font-size: 1vw;
   line-height: 1.7vw;
+}
+.viewmore{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vw;
+}
+.viewmore>a{
+  color: #64f4acea;
+  text-decoration: none;
+}
+.viewmore>a:hover{
+  text-decoration: underline;
 }
 
 .project_stack {
