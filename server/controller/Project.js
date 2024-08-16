@@ -40,7 +40,7 @@ exports.getAllProjects = async (req, res) => {
         const limit = 8;
         const skip = (page_no - 1) * limit;
 
-        const projects = await Project.find({ owner: req.user._id }).skip(skip).limit(limit);
+        const projects = await Project.find().skip(skip).limit(limit);
 
         return res.status(200).json({
             success: true,
