@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Toaster, toast } from 'sonner'
 import FormLoader from './loaders/FormLoader';
 import { AuthContext } from './Layout';
-// axios.defaults.baseURL = 'http://localhost:5173/api/v1';
+axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 const ErrorComponent = ({ children }) => (
   <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
@@ -139,7 +139,7 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
     setLoading(true);
     try {
       const token = JSON.parse(localStorage.getItem("token"));
-      const { data } = await axios.put(`http://localhost:5173/api/v1/updateProject/${currentProject.id}`, {
+      const { data } = await axios.put(`/updateProject/${currentProject.id}`, {
         title, dispcription, github, livelink, avatar, techstack
       },
         {

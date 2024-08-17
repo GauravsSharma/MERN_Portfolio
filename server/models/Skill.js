@@ -5,7 +5,7 @@ const skillSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    avatar: {
+    thumbnail: {
         public_id: String,
         url: String,
     },

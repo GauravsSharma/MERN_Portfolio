@@ -3,9 +3,16 @@ import { Field, ErrorMessage, Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { GiCrossedBones } from "react-icons/gi";
 import { FaPlus } from "react-icons/fa";
+import axios from 'axios';
+import { Toaster, toast } from 'sonner'
+import FormLoader from './loaders/FormLoader';
+import { AuthContext } from './Layout';
+axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
+
 
 const ContactForm = ({ setIsAddSkillOpen, style }) => {
     const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false)
     const validationSchema = Yup.object({
         skill: Yup.string().required('Skill is required'),
         skill_image: Yup.string().required('Image is required'),
@@ -30,7 +37,29 @@ const ContactForm = ({ setIsAddSkillOpen, style }) => {
             reader.readAsDataURL(file);
         }
     };
-
+    const addSkill = async (
+        skill_name, thumbnail
+    ) => {
+        setLoading(true);
+        try {
+            const token = JSON.parse(localStorage.getItem("token"));
+            const { data } = await axios.post("/addSkill", {
+                skill_name, thumbnail
+            },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            setLoading(false)
+            toast.success("Project added")
+            getProjects()
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
+    }
     return (
         <Formik
             initialValues={{
@@ -76,7 +105,9 @@ const ContactForm = ({ setIsAddSkillOpen, style }) => {
                         </div>
                     </div>
                     <div className="submitbtn">
-                        <button type="submit">Submit</button>
+                        <button type="submit" disabled={loading}>
+                            {loading ? <FormLoader /> : "Submit"}
+                        </button>
                     </div>
                 </Form>
             )}
