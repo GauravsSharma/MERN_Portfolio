@@ -25,7 +25,7 @@ exports.addSkill = async (req, res) => {
             skill: newSkill
         })
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             success: false,
             mesage: error.message
         })

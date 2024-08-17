@@ -67,8 +67,8 @@ const ContactForm = ({ setIsAddSkillOpen, style }) => {
                 skill_image: '',
             }}
             validationSchema={validationSchema}
-            onSubmit={(values, { resetForm }) => {
-                console.log(values);
+            onSubmit={async(values, { resetForm }) => {
+                await addSkill(values.skill,image)
                 setImage(null)
                 resetForm();
             }}

@@ -8,6 +8,7 @@ const skillSchema = new mongoose.Schema({
     thumbnail: {
         public_id: String,
         url: String,
+        
     },
     owner:[
         {
