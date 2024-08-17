@@ -1,10 +1,10 @@
 import React from 'react'
 import SkillCart from './SkillCart'
-import { FaReact } from "react-icons/fa6";
+import { FaReact } from "react-icons/fa";
 import { SiMongodb } from "react-icons/si";
+import profile_pic from "../assets/admin_pic.jpeg"
 import { SiExpress } from "react-icons/si";
 import { FaNodeJs } from "react-icons/fa";
-import profile_pic from "../assets/admin_pic.jpeg"
 import { motion } from 'framer-motion';
 const About = ({
   isFromAbout = false
@@ -12,42 +12,52 @@ const About = ({
   const fadeInAnimationVariants = {
     initial: {
       opacity: 0,
-      y: 100,
-      scale: 0.95,  // Start slightly scaled down   // Add a subtle rotation
+      y: 100,  // Start slightly scaled down   // Add a subtle rotation
     },
     animate: (index) => ({
       opacity: 1,
-      y: 0,
-      scale: 1,    // Scale back to normal   // Rotate back to 0 degrees
+      y: 0,   // Scale back to normal   // Rotate back to 0 degrees
       transition: {
         type: 'spring',   // Use spring physics for a natural effect
-    // Control the spring stiffness
-        damping: 10,      // Control the damping for the spring
-        delay: 0.05 * index, // Staggered delay based on index
+        // Control the spring stiffness     // Control the damping for the spring
+        delay: 0.5 * index, // Staggered delay based on index
       }
     })
   };
-  
+  const scaleInCardAnimation = {
+    initial: {      
+      opacity:0,
+      scale:0.5
+    },
+    animate: (index) => ({
+      scale:1,
+      opacity:1,
+      transition: {
+        type: 'spring',  
+        delay: 0.05*index, 
+      }
+    })
+  }
   const skills = [
     {
       skill_name:"Mongodb",
       dis:"Development of complex and scalable backend architecture",
-      Icon:"SiMongodb"
+      Icon:<SiMongodb/>
     },
     {
       skill_name:"Express",
       dis:"Development of complex and scalable backend architecture",
-      Icon:"SiExpress"
+      Icon:<SiExpress/>
     },
     {
       skill_name:"Node",
       dis:"Development of complex and scalable backend architecture",
-      Icon:"FaNodeJs"
+      Icon:<FaNodeJs/>
     },
     {
       skill_name:"React",
       dis:"Development of complex and scalable backend architecture",
-      Icon:"FaReact"
+      Icon:<FaReact/>
     },
   ]
   return (
@@ -60,8 +70,14 @@ const About = ({
      
      <div className="skills">
         {
-          skills.map(({skill_name,dis,Icon},index)=>(
-            <SkillCart key={index} fadeInAnimationVariants={fadeInAnimationVariants} index={index} Icon={Icon} skill_name={skill_name} skill_dis={dis} />
+          skills.map((skill,index)=>(
+            <SkillCart 
+            key={index} 
+            scaleInCardAnimation={fadeInAnimationVariants} 
+            index={index} 
+            Icon={skill.Icon} 
+            skill_name={skill.skill_name} 
+            skill_dis={skill.dis} />
           ))
         }
       </div>}

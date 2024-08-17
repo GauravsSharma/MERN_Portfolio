@@ -4,13 +4,12 @@ import * as Yup from 'yup';
 import { GiCrossedBones } from "react-icons/gi";
 import { FaPlus } from "react-icons/fa";
 import axios from 'axios';
-import { Toaster, toast } from 'sonner'
+import toast from "react-hot-toast"
 import FormLoader from './loaders/FormLoader';
-import { AuthContext } from './Layout';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
 
-const ContactForm = ({ setIsAddSkillOpen, style }) => {
+const ContactForm = ({ setIsAddSkillOpen, style,getSkills }) => {
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false)
     const validationSchema = Yup.object({
@@ -53,8 +52,10 @@ const ContactForm = ({ setIsAddSkillOpen, style }) => {
                 }
             )
             setLoading(false)
-            toast.success("Skill added")
-            getProjects()
+            toast.success("Skill added",{
+                position:"bottom-center"
+            })
+            getSkills()
         } catch (error) {
             console.log(error);
             setLoading(false)
@@ -111,6 +112,7 @@ const ContactForm = ({ setIsAddSkillOpen, style }) => {
                     </div>
                 </Form>
             )}
+            {/* <Toaster richColors position='bottom-center'/> */}
         </Formik>
     );
 };

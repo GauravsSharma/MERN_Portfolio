@@ -7,6 +7,8 @@ import ContactForm from '../components/ContactForm'
 import { AiFillMessage } from "react-icons/ai";
 import Login from "../components/Login"
 import { LoginContext } from '../components/Layout'
+import { ToastBar, Toaster } from 'react-hot-toast'
+
 const Home = () => {
   const [isContactOpen,setIsContactOpen] = useState(false);
   const {setIsloginFormOpen, styleForLogin } = useContext(LoginContext);
@@ -32,7 +34,7 @@ const Home = () => {
       {!isContactOpen &&<div className="sendmssg"  onClick={()=>setIsContactOpen(true)}>
          <AiFillMessage/>
       </div>}
-     
+     <Toaster/>     
     </div>
   )
 }

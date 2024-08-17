@@ -3,6 +3,7 @@ import { Field, ErrorMessage, Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { GiCrossedBones } from "react-icons/gi";
 import axios from 'axios';
+import toast from "react-hot-toast"
 import {AuthContext} from "./Layout"
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 
@@ -30,6 +31,9 @@ const Login = ({ stIsloginFormOpen, style }) => {
         password
       });
       setUser(data.user)
+      toast.success("Login success",{
+        position:"bottom-center"
+      })
       localStorage.setItem("token", JSON.stringify(data.token));
 
     } catch (error) {

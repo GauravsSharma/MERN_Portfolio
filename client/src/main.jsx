@@ -13,6 +13,9 @@ import Layout from './components/Layout.jsx';
 import AddProjectDialogBox from './components/AddProjectDialogBox.jsx';
 import ContactForm from './components/ContactForm.jsx';
 import "./responsive.css"
+import "../src/components/loaders/loader.css"
+import Loader from './components/loaders/Loader.jsx';
+import Education from './pages/Education.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,8 +34,8 @@ const router = createBrowserRouter([
         element: <Projects />,
       },
       {
-        path: "/add",
-        element: <ContactForm />,
+        path: "/education",
+        element: <Education/>,
       },
     ],
   },

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PageHeader } from '../components/PageHeader'
 import ProjectCard from '../components/ProjectCard'
 import { FaPlus } from "react-icons/fa";
 import AddProjectDialogBox from "../components/AddProjectDialogBox"
-import axios from 'axios';
+import {Toaster} from "react-hot-toast"
+import { AuthContext } from '../components/Layout';
+import axios  from 'axios';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const Projects = () => {
   const [isDialogBocOpen,setIsDialogBoxOpen] = useState(false);
   const [projects, setProjects] = useState(null);
   const [currentProject, setCurrentProject] = useState(null);
+  const {user} = useContext(AuthContext)
   const scaleInCardAnimation = {
     initial: {      
       opacity:0,
@@ -66,6 +69,7 @@ const Projects = () => {
              id={project?._id}
              setIsDialogBoxOpen={setIsDialogBoxOpen}
              setCurrentProject={setCurrentProject}
+             getProjects={getProjects}
              />
           ))}
         {
@@ -76,12 +80,12 @@ const Projects = () => {
         />
       }
       </div>
-      <div className='padding add_btn_div'>
+     {user&&<div className='padding add_btn_div'>
         <button className='add_btn'
         onClick={handleAddClick}
         ><FaPlus /></button>
-      </div>
-     
+      </div>}
+     <Toaster/>
     </div>
   )
 }

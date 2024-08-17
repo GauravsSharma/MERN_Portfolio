@@ -42,10 +42,12 @@
   font-size: 14px;
 }
 
-.header>div>ul>a {
+.header>div>ul>li>a {
   text-decoration: none;
-  color: white;
+}
 
+.header>div>ul>li{
+  list-style: none;
 }
 
 .header>ul {
@@ -119,6 +121,7 @@
   background: rgb(32 32 34);
   margin-top: 3vw;
   color: white;
+  text-decoration: none;
 
 }
 
@@ -239,7 +242,7 @@
   /* border: 1px solid #64f4acea; */
   border-radius: 8px;
   /* background: #000; */
-  transition: all 0.2s ease-in
+  transition: all 0.2s ease-in;
 }
 
 .skill_cart:hover {
@@ -358,7 +361,6 @@
   height: 15%;
   width: 100%;
   background: #000000ab;
-  z-index:100;
   top: 100%;
   left: 0;
   display: flex;
@@ -440,6 +442,8 @@
   justify-content: center;
   align-items: center;
   gap: 3px;
+  text-decoration: none;
+  color: white;
 }
 
 .view_icon {
@@ -816,7 +820,18 @@ form>h1 {
   justify-content: center;
   align-items: center;
 }
-
+a.active{
+  color: #64f4acea;
+}
+ul>li:hover{
+  color: #64f4acea;
+}
+ul>li>a:hover{
+  color: #64f4acea;
+}
+.white{
+  color: white;
+}
 .contact_form {
   height: auto;
   width: 25%;
@@ -903,8 +918,26 @@ form>h1 {
   justify-content: center;
   align-items: center;
   gap: 0.5vw;
+  position: relative;
+  overflow: hidden;
 }
-
+.deleteupdate2{
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #000000ab;
+  top: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.skillcart:hover .deleteupdate2{
+  top: 0;
+}
 .skillcart>img {
   height: 4vw;
   width: 4vw;
@@ -935,4 +968,41 @@ form>h1 {
 }
 .bg_red{
   background: red;
+}
+.edu_container{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgb(32 32 34);
+  gap: 2vw;
+  padding-top: 3vw;
+  padding-bottom: 3vw;
+}
+.edu_cart{
+  height: auto;
+  width: 25rem;
+  border: 2px solid #64f4acea;
+  border-radius: 6px;
+  padding: 1.5vw; 
+  background-color: transparent;
+  color: white;
+  background: rgb(24, 24, 25);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 20px 0px;
+}
+.edu_cart>h2{
+  font-size: 1.3rem;
+  font-weight:500;
+}
+.edu_cart>h2>span{
+  color: #64f4acea;
+}
+.edu_cart>div{
+  padding: 0.3rem;
+  border: 2px solid #64f4acea;
+  border-radius: 6px;
+  margin: 0.6rem 0;
+  font-size: 15px;
+  background: rgb(32 32 34);
+  display: inline-block;
 }

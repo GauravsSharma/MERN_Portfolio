@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import ProjectCard from './ProjectCard'
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { AuthContext } from "./Layout"
 import { Link } from 'react-router-dom';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const Projects = () => {

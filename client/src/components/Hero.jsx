@@ -4,35 +4,38 @@ import mongodb from "../assets/mongodb.png"
 import react from "../assets/react.png"
 import node from "../assets/node.png"
 import { motion } from "framer-motion"
+import cv from "../assets/Gaurav_Sharma.pdf"
 const Hero = () => {
   const animateFromRight = {
-    initial: {      
-      opacity:0,
-      x:-200
+    initial: {
+      opacity: 0,
+      x: -200
     },
     animate: (index) => ({
-      opacity:1,
-      x:0,
+      opacity: 1,
+      x: 0,
       transition: {
-        type: 'spring',  
-        delay: 0.05*index, 
+        type: 'spring',
+        delay: 0.05 * index,
       }
-    })}
+    })
+  }
   return (
     <div className='hero padding'>
       <div className="info">
         <div>Full stack developer</div>
-        <motion.h1 
-         variants={animateFromRight}
-         initial="initial"
-         whileInView="animate"
-         custom={0}
+        <motion.h1
+          variants={animateFromRight}
+          initial="initial"
+          whileInView="animate"
+          custom={0}
         >
           Making The Impossible Possible. Using 1's and 0's.
         </motion.h1>
         <p>Problem solving is what makes me unique.
         </p>
-        <button className="btn">View CV</button>
+        <a href={cv} download className="btn">View CV</a>
+
       </div>
       <motion.div
         className='profile'>

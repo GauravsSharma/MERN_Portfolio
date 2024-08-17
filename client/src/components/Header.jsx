@@ -6,6 +6,7 @@ import { LuLogIn } from "react-icons/lu";
 import { Link } from 'react-router-dom';
 import { LoginContext } from './Layout';
 import { AuthContext } from './Layout';
+import { NavLink } from 'react-router-dom';
 const Header = () => {
   const { setIsloginFormOpen } = useContext(LoginContext);
   const { user } = useContext(AuthContext);
@@ -14,23 +15,56 @@ const Header = () => {
       <div>
         <h1>Gaurav Sharma</h1>
         <ul>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/projects">Projects</Link>
+          <li>
+            <NavLink
+              exact to="/"
+              activeClassName="active"  // Apply the 'active' class when this route is active
+              className="white"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              activeClassName="active"
+              className="white"
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/projects"
+              activeClassName="active"
+              className="white"
+            >
+              Projects
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/education"
+              activeClassName="active"
+              className="white"
+            >
+              Education
+            </NavLink>
+          </li>
         </ul>
       </div>
       <ul>
         <li>
           <SiLeetcode className='icon' />
-          <a href="">Leetcode</a>
+          <Link to="https://leetcode.com/u/Gaurav_1607/">Leetcode</Link>
         </li>
         <li>
           <FaLinkedin className='icon' />
-          <a href="">Linkdin</a>
+          <Link to="https://www.linkedin.com/in/gaurav-sharma-ab1660233/">Linkdin</Link>
         </li>
         <li>
           <FaGithub className='icon' />
-          <a href="">Github</a>
+          <Link to="https://github.com/GauravsSharma">Github</Link>
         </li>
         {
           !user && <li

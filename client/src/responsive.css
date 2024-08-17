@@ -2,10 +2,12 @@
     .profile {
         display: none;
     }
+
     .min_heading {
         margin-top: 2vw;
         font-size: 2.2vw;
     }
+
     .info {
         width: 100%;
     }
@@ -32,6 +34,7 @@
 
     .skills {
         width: 100%;
+        gap: 4vw;
     }
 
     .skill_cart {
@@ -159,11 +162,21 @@
         margin-bottom: 18vw;
     }
 
+    .edu_cart {
+        width: 33rem;
+    }
+
+    .edu_container {
+        justify-content: center;
+        padding-top: 8vw;
+        padding-bottom: 8vw;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    .header>ul>li>a, 
-    .header>ul>li>span{
+
+    .header>ul>li>a,
+    .header>ul>li>span {
         display: none;
     }
 
@@ -184,12 +197,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1vw 4vw;
-        width: 92%;
+        padding: 1vw 6vw;
+        width: 88%;
         border-top: 2px solid rgb(68 68 68);
         transition: all 0.5s easy;
 
     }
+
     .active>div {
         border-radius: 50%;
         background: rgb(24, 24, 25);
@@ -240,17 +254,19 @@
         margin-top: 5vw;
     }
 
-     
-    .mobile_header>a.active{
+
+    .mobile_header>a.active {
         color: #64f4acea;
-      }
-    .mobile_header>a.active span{
+    }
+
+    .mobile_header>a.active span {
         top: 64%;
-      }
-      .active>div{
+    }
+
+    .active>div {
         margin-bottom: 18px;
-      }
-    
+    }
+
     .padding {
         padding-left: 5vw;
         padding-right: 5vw;
@@ -344,6 +360,10 @@
         padding-top: 10vw;
     }
 
+    .about_me>h1 {
+        font-size: 7vw;
+    }
+
     .skillcart>img {
         height: 10vw;
         width: 10vw;
@@ -359,6 +379,7 @@
     .admin_name {
         font-size: 3vw;
     }
+
     .contact_form {
         right: 3vw;
     }
@@ -463,6 +484,10 @@
         font-size: 4.3vw;
     }
 
+    .skill_name>p {
+        font-size: 3.8vw;
+    }
+
     .skill_icon {
         width: 7vw;
         height: 7vw;
@@ -504,6 +529,13 @@
     form {
         margin-top: 6vw;
     }
+    .edu_cart>p{
+      font-size: 16px;
+    }
+    .edu_container{
+        padding-top: 16vw;
+        padding-bottom: 16vw;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -522,5 +554,21 @@
     .quote_div {
         margin-top: 15vw;
         padding: 7vw;
+    }
+    .edu_cart{
+        padding: 3vw;
+    }
+    .edu_cart>h2 {
+        font-size: 1rem;
+    }
+    .edu_cart>p{
+        font-size: 14px;
+      }
+      .edu_cart>div {
+        padding: 0.3rem 0.6rem
+    }
+    .edu_container {
+        gap: 5vw;
+        
     }
 }

@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Select from 'react-select';
 import axios from 'axios';
-import { Toaster, toast } from 'sonner'
+import toast,{Toaster} from "react-hot-toast"
 import FormLoader from './loaders/FormLoader';
 import { AuthContext } from './Layout';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
@@ -109,13 +109,13 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
   });
 
   const addProject = async (
-    title, dispcription, github, livelink, avatar, techstack
+    title, discription, github, livelink, avatar, techstack
   ) => {
     setLoading(true);
     try {
       const token = JSON.parse(localStorage.getItem("token"));
       const { data } = await axios.post("/addproject", {
-        title, dispcription, github, livelink, avatar, techstack
+        title, discription, github, livelink, avatar, techstack
       },
         {
           headers: {
@@ -124,7 +124,9 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
         }
       )
       setLoading(false)
-      toast.success("Project added")
+      toast.success("Project added",{
+        position:"bottom-center"
+      })
       getProjects()
     } catch (error) {
       console.log(error);

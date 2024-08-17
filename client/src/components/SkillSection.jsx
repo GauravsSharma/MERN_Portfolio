@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Skill_Cart from './Skill_Cart'
 import { FaPlus } from "react-icons/fa";
 import AddSkillForm from "./AddSkillForm"
 import axios from 'axios';
+import {Toaster} from "react-hot-toast"
+import { AuthContext } from './Layout';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const SkillSection = () => {
   const [isAddSkillOpen, setIsAddSkillOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [skills, setSkills] = useState(null)
+  const {user} = useContext(AuthContext)
   const style = {
-    top: isAddSkillOpen ? "50%" : "102%"
+    top: isAddSkillOpen ? "40%" : "102%"
   }
   const fadeInAnimationVariants = {
     initial: {
@@ -55,13 +58,20 @@ const SkillSection = () => {
     <div className='skills_main padding'>
       <h1>Technologies and tools</h1>
       <div className="skill_container">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
-          <Skill_Cart key={index} index={index}
-            fadeInAnimationVariants={fadeInAnimationVariants} />
+        {skills?.map((skill, index) => (
+          <Skill_Cart key={skill?._id} index={index}
+            fadeInAnimationVariants={fadeInAnimationVariants} 
+            skill_name={skill.skill_name}
+            thumbnail = {skill?.thumbnail.url}
+            getSkills={getSkills}
+            id={skill?._id}
+            />
+            
         ))}
-        <div className='addskill_icon' onClick={() => setIsAddSkillOpen(true)}><FaPlus /></div>
+        {user&&<div className='addskill_icon' onClick={() => setIsAddSkillOpen(true)}><FaPlus /></div>}
       </div>
-      <AddSkillForm setIsAddSkillOpen={setIsAddSkillOpen} style={style} />
+      <AddSkillForm setIsAddSkillOpen={setIsAddSkillOpen} style={style} getSkills={getSkills}/>
+      <Toaster />
     </div>
   )
 }

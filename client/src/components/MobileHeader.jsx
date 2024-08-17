@@ -4,6 +4,7 @@ import { GrProjects } from "react-icons/gr";
 import { IoPersonOutline } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
+import { FaStudiovinari } from "react-icons/fa";
 
 const MobileHeader = () => {
    return (
@@ -37,13 +38,13 @@ const MobileHeader = () => {
             <span> About</span>
          </NavLink>
          <NavLink
-            to=".footer"
+            to="/education"
             className={({ isActive }) => (isActive ? 'active' : '')}
          >
             <div>
-               <MdOutlineMailOutline />
+               <FaStudiovinari />
             </div>
-            <span> Contact</span>
+            <span> Education</span>
          </NavLink>
       </div>
    )

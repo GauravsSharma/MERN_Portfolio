@@ -1,11 +1,15 @@
 import { FaArrowRight } from "react-icons/fa6";
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { motion } from 'framer-motion';
 import { FaGithub } from "react-icons/fa";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom"
+import axios from 'axios';
 import { AuthContext } from "../components/Layout"
+import toast from "react-hot-toast"
+import Loader from "./loaders/Loader";
+axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const ProjectCard = ({
     index,
     fadeInAnimationVariants,
@@ -17,10 +21,12 @@ const ProjectCard = ({
     dis,
     setIsDialogBoxOpen,
     id,
-    setCurrentProject
+    setCurrentProject,
+    getProjects,
 }) => {
     console.log(thumbnail);
     const { user } = useContext(AuthContext)
+    const [loading,setLoading] = useState(false)
     const handleOnClick = () => {
         setCurrentProject({
             title,
@@ -32,6 +38,35 @@ const ProjectCard = ({
             id,
         })
         setIsDialogBoxOpen(true);
+    }
+    const deleteProject = async (id) => {
+        try {
+            setLoading(true)
+            const token = JSON.parse(localStorage.getItem("token"));
+            if (!token) {
+                throw new Error("No token found");
+            }
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            const { data } = await axios.delete(`/deleteProject/${id}`, config);
+            // Handle the response if needed
+            setLoading(false)
+            toast.success("Project deleted successfully",{
+                position:"bottom-center"
+            });
+            getProjects()
+            console.log("Project deleted successfully:", data);
+        } catch (error) {
+            console.error("Error deleting project:", error);
+            setLoading(false)
+            toast.error("Failed to delete project");
+        }
+    };
+    if(loading){
+        return <Loader/>
     }
     return (
         <motion.div className='project_cart'
@@ -52,9 +87,9 @@ const ProjectCard = ({
                             <span key={idx}>{lang}</span>
                         ))}
                     </div>
-                    <div className='view'>View
+                    <Link className='view' to={livelink}>View
                         <FaArrowRight className="view_icon" />
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div className="deleteupdate">
@@ -62,9 +97,13 @@ const ProjectCard = ({
                 {
                     user && <>
                         <AiOutlineEdit className="icone" onClick={handleOnClick} />
-                        <MdDeleteOutline className="icone" />
+                        <MdDeleteOutline className="icone" onClick={()=>deleteProject(id)}/>
                     </>
                 }
+                 <Link className='view' to={livelink}>View
+                        <FaArrowRight className="view_icon" />
+                    </Link>
+                
             </div>
         </motion.div>
     )
