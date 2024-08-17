@@ -32,20 +32,21 @@ exports.addSkill = async (req, res) => {
     }
 }
 
-exports.getAllSkills = async(req,res)=>{
+exports.getAllSkills = async (req, res) => {
     try {
-       const skills = await Skill.find()
-       return res.statue(200).json({
-         success:true,
-         skills
-       })
+      const skills = await Skill.find();
+      return res.status(200).json({
+        success: true,
+        skills,
+      });
     } catch (error) {
-       res.status(500).json({
-         success:false,
-         message:error
-       })
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
- }
+  };
+  
 exports.deleteSkill = async (req, res) => {
     try {
         // Find the project by ID
