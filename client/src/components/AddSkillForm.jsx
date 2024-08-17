@@ -53,7 +53,7 @@ const ContactForm = ({ setIsAddSkillOpen, style }) => {
                 }
             )
             setLoading(false)
-            toast.success("Project added")
+            toast.success("Skill added")
             getProjects()
         } catch (error) {
             console.log(error);

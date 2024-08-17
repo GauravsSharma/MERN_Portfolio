@@ -5,7 +5,7 @@ const cloudinary = require("cloudinary").v2
 exports.addSkill = async (req, res) => {
     try {
         const { skill_name, thumbnail } = req.body;
-        const myCloud = await cloudinary.uploader.upload(avatar, {
+        const myCloud = await cloudinary.uploader.upload(thumbnail, {
             folder: "skills"
          });
          const skill = {
