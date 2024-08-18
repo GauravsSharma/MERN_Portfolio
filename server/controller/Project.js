@@ -37,7 +37,7 @@ exports.addProject = async (req, res) => {
 exports.getAllProjects = async (req, res) => {
     try {
         const page_no = parseInt(req.params.page_no, 10) || 1;
-        const limit = 8;
+        const limit = 6;
         const skip = (page_no - 1) * limit;
 
         const projects = await Project.find().skip(skip).limit(limit);
@@ -93,16 +93,13 @@ exports.updateProject = async (req, res) => {
             project.techstack = techstack;
         }
 
-        // If an avatar is provided, delete the old one from Cloudinary and upload the new one
         if (avatar) {
+            console.log(avatar);
             
-            // Delete the old avatar from Cloudinary
             if (project.thumnail && project.thumnail.public_id) {
                 console.log();
                 await cloudinary.uploader.destroy(project.thumnail.public_id);
             }
-
-            // Upload the new avatar to Cloudinary
             const myCloud = await cloudinary.uploader.upload(avatar, {
                 folder: "projects"
             });

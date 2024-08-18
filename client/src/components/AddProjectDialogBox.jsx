@@ -73,7 +73,7 @@ const options = [
 ];
 
 const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects}) => {
-  const [image, setImage] = useState(currentProject?.thumbnail);
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const {projectId} = useContext(AuthContext)
   const handleImageBoxClick = () => {
@@ -99,12 +99,6 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
     description: Yup.string().required('Description is required'),
     githubUrl: Yup.string().url('Invalid URL').required('Github URL is required'),
     liveLink: Yup.string().url('Invalid URL').required('Live link is required'),
-    image: Yup.mixed().test('image-required', 'Image is required', function(value) {
-      if (currentProject) {
-        return value || image;  // Accept either a file or an existing image URL
-      }
-      return value;  // Only accept a file for new projects
-    }),
     technologies: Yup.array().min(1, 'Select at least one technology').required('Technologies are required'),
   });
 
@@ -155,6 +149,7 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
       getProjects()
     } catch (error) {
       console.log(error);
+      toast.error("Project not updated")
       setLoading(false)
     }
   }
@@ -167,12 +162,11 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
             description: currentProject?.dis || "",
             githubUrl: currentProject?.github || "",
             liveLink: currentProject?.livelink || "",
-            image: currentProject?.thumbnail || null,  // Set to URL if available
+            image: null,  // Set to URL if available
             technologies: currentProject?.techstack?.map((tech) => ({ value: tech, label: tech })) || []
           }}
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
-          setImage(null);
           const techstack = values.technologies.map(({ value }) => value)
           console.log(techstack);
           
@@ -195,6 +189,7 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
               image,
               techstack
             )
+            setImage(null);
           }
           resetForm()
         }}
@@ -268,7 +263,6 @@ const AddProjectDialogBox = ({ currentProject, setIsDialogBoxOpen ,getProjects})
           </Form>
         )}
       </Formik>
-      <Toaster position="bottom-center" richColors/>
     </div>
   );
 }

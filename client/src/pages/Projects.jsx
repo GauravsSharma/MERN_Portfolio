@@ -9,7 +9,8 @@ import axios  from 'axios';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const Projects = () => {
   const [isDialogBocOpen,setIsDialogBoxOpen] = useState(false);
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState([]);
+  const [page,setPage] = useState(1);
   const [currentProject, setCurrentProject] = useState(null);
   const {user} = useContext(AuthContext)
   const scaleInCardAnimation = {
@@ -29,20 +30,28 @@ const Projects = () => {
   const getProjects = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
-      const { data } = await axios.get("/getprojects/:1", {
+      const { data } = await axios.get(`/getprojects/${page}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      setProjects(data.projects);
+      setProjects([...projects,...data.projects]);
       console.log(data.projects);
     } catch (error) {
       console.log(error.message);
     }
   }
+  console.log(projects);
+  
+  const handleLoadMore = ()=>{
+    setCurrentProject(prev=>prev+1);
+  }
+
+
   useEffect(()=>{
     getProjects()
-  },[])
+  },[page])
+ 
   const handleAddClick = () => {
     setCurrentProject(null); // Reset to null when adding a new project
     setIsDialogBoxOpen(true);
@@ -79,6 +88,11 @@ const Projects = () => {
         getProjects={getProjects}
         />
       }
+      </div>
+      <div className='viewmore'>
+        <a
+        onClick={handleLoadMore}
+        >Load more</a>
       </div>
      {user&&<div className='padding add_btn_div'>
         <button className='add_btn'
