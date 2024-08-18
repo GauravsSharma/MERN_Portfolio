@@ -96,9 +96,9 @@ const Projects = () => {
       }
       </div>
       <div className='viewmore'>
-        <a
+        <span
         onClick={handleLoadMore}
-        >Load more</a>
+        >Load more</span>
       </div>
      {user&&<div className='padding add_btn_div'>
         <button className='add_btn'

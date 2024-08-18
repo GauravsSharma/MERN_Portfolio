@@ -408,6 +408,11 @@
 .viewmore>a{
   color: #64f4acea;
   text-decoration: none;
+  cursor: pointer;
+}
+.viewmore>span{
+  color: #64f4acea;
+  cursor: pointer;
 }
 .viewmore>a:hover{
   text-decoration: underline;

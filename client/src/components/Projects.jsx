@@ -3,9 +3,11 @@ import ProjectCard from './ProjectCard'
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import CardLoader from './loaders/CardLoader';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const Projects = () => {
   const [projects, setProjects] = useState(null);
+  const [loading,setLoading] = useState(false)
   const fadeInAnimationVariants = {
     initial: {
       opacity: 0,
@@ -52,6 +54,7 @@ const Projects = () => {
   }
   const getProjects = async () => {
     try {
+      setLoading(true)
       const token = JSON.parse(localStorage.getItem("token"));
       const { data } = await axios.get("/getprojects/:1", {
         headers: {
@@ -59,8 +62,10 @@ const Projects = () => {
         }
       })
       setProjects(data.projects);
+      setLoading(false)
       console.log(data.projects);
     } catch (error) {
+      setLoading(false);
       console.log(error.message);
     }
   }
@@ -100,6 +105,9 @@ const Projects = () => {
           dis = {project?.discription}
           />
         ))}
+   {
+    loading&&<CardLoader/>
+   }
       </div>
       <div className='viewmore'>
         <Link to="/projects">view more</Link>
