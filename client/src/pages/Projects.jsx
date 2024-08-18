@@ -6,11 +6,13 @@ import AddProjectDialogBox from "../components/AddProjectDialogBox"
 import {Toaster} from "react-hot-toast"
 import { AuthContext } from '../components/Layout';
 import axios  from 'axios';
+import CardLoader from '../components/loaders/CardLoader';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const Projects = () => {
   const [isDialogBocOpen,setIsDialogBoxOpen] = useState(false);
   const [projects, setProjects] = useState([]);
   const [page,setPage] = useState(1);
+  const [loading,setLoading] = useState(false);
   const [currentProject, setCurrentProject] = useState(null);
   const {user} = useContext(AuthContext)
   const scaleInCardAnimation = {
@@ -29,6 +31,7 @@ const Projects = () => {
   }
   const getProjects = async () => {
     try {
+      setLoading(true);
       const token = JSON.parse(localStorage.getItem("token"));
       const { data } = await axios.get(`/getprojects/${page}`, {
         headers: {
@@ -36,15 +39,17 @@ const Projects = () => {
         }
       })
       setProjects([...projects,...data.projects]);
+      setLoading(false);
       console.log(data.projects);
     } catch (error) {
+      setLoading(false);
       console.log(error.message);
     }
   }
   console.log(projects);
   
   const handleLoadMore = ()=>{
-    setCurrentProject(prev=>prev+1);
+    setPage(prev=>prev+1);
   }
 
 
@@ -81,6 +86,7 @@ const Projects = () => {
              getProjects={getProjects}
              />
           ))}
+          {loading && <CardLoader/>}
         {
         isDialogBocOpen&&<AddProjectDialogBox setIsDialogBoxOpen={setIsDialogBoxOpen}
         isDialogBocOpen={isDialogBocOpen}

@@ -31,6 +31,7 @@ const Login = ({ stIsloginFormOpen, style }) => {
         password
       });
       setUser(data.user)
+      stIsloginFormOpen(false)
       toast.success("Login success",{
         position:"bottom-center"
       })

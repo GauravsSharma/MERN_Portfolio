@@ -38,6 +38,7 @@ const ContactForm = ({ stIsContactOpen, style }) => {
       toast.success("Email send",{
         position:"bottom-center"
       })
+      stIsContactOpen(false)
       resetForm()
     })
     .catch((error)=>{
