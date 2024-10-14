@@ -175,11 +175,13 @@
 
 @media screen and (max-width: 500px) {
 
-    .header>ul>li>a,
+    .header>ul>a>span,
     .header>ul>li>span {
         display: none;
     }
-
+    .about_me>p {
+        margin-top: 5vw;
+    }
     .icon {
         font-size: 21px;
     }
@@ -306,14 +308,12 @@
     }
 
     .skillcart {
-        height: auto;
-        width: auto;
         padding: 3vw 8vw;
     }
 
     .skill_container {
         margin-top: 10vw;
-        gap: 6vw;
+        gap: 3vw;
     }
 
     .add_btn {

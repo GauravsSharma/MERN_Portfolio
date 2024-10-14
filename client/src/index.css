@@ -72,10 +72,13 @@
   gap: 5px;
 }
 
-.header>ul>li>a {
+.header>ul>a {
   text-decoration: none;
   color: white;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .hero {

@@ -24,39 +24,25 @@ const About = ({
       }
     })
   };
-  const scaleInCardAnimation = {
-    initial: {      
-      opacity:0,
-      scale:0.5
-    },
-    animate: (index) => ({
-      scale:1,
-      opacity:1,
-      transition: {
-        type: 'spring',  
-        delay: 0.05*index, 
-      }
-    })
-  }
   const skills = [
     {
       skill_name:"Mongodb",
-      dis:"Development of complex and scalable backend architecture",
+      dis:"MongoDB is a NoSQL database storing data in flexible, JSON-like documents.",
       Icon:<SiMongodb/>
     },
     {
       skill_name:"Express",
-      dis:"Development of complex and scalable backend architecture",
+      dis:"Express is a minimal and flexible Node.js web application framework.",
       Icon:<SiExpress/>
     },
     {
       skill_name:"Node",
-      dis:"Development of complex and scalable backend architecture",
+      dis:"Node.js is a runtime environment that allows you to run JavaScript on the server side.",
       Icon:<FaNodeJs/>
     },
     {
       skill_name:"React",
-      dis:"Development of complex and scalable backend architecture",
+      dis:"React is a JavaScript library for building dynamic user interfaces with reusable components.",
       Icon:<FaReact/>
     },
   ]

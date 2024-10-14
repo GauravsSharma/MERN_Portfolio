@@ -3,9 +3,6 @@ const User = require("../models/User")
 exports.register = async (req, res) => {
     try {
         const { name, password, email, avatar } = req.body;
-        // const myCloud = await cloudinary.uploader.upload(avatar, {
-        //     folder: "users"
-        // });
         let user = await User.findOne({ email });
         if (user) {
             return res.status(500).json({

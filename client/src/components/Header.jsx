@@ -54,18 +54,18 @@ const Header = () => {
         </ul>
       </div>
       <ul>
-        <li>
+        <Link to="https://leetcode.com/u/Gaurav_1607/">
           <SiLeetcode className='icon' />
-          <Link to="https://leetcode.com/u/Gaurav_1607/">Leetcode</Link>
-        </li>
-        <li>
+          <span >Leetcode</span>
+        </Link>
+        <Link to="https://www.linkedin.com/in/gaurav-sharma-ab1660233/">
           <FaLinkedin className='icon' />
-          <Link to="https://www.linkedin.com/in/gaurav-sharma-ab1660233/">Linkdin</Link>
-        </li>
-        <li>
+          <span >Linkdin</span>
+        </Link>
+        <Link to="https://github.com/GauravsSharma">
           <FaGithub className='icon' />
-          <Link to="https://github.com/GauravsSharma">Github</Link>
-        </li>
+          <span >Github</span>
+        </Link>
         {
           !user && <li
             onClick={() => setIsloginFormOpen(true)}

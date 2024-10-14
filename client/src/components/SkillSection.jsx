@@ -5,6 +5,7 @@ import AddSkillForm from "./AddSkillForm"
 import axios from 'axios';
 import {Toaster} from "react-hot-toast"
 import { AuthContext } from './Layout';
+import CardLoader from './loaders/CardLoader';
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const SkillSection = () => {
   const [isAddSkillOpen, setIsAddSkillOpen] = useState(false);
@@ -68,6 +69,9 @@ const SkillSection = () => {
             />
             
         ))}
+        {
+          loading&&<CardLoader/>
+        }
         {user&&<div className='addskill_icon' onClick={() => setIsAddSkillOpen(true)}><FaPlus /></div>}
       </div>
       <AddSkillForm setIsAddSkillOpen={setIsAddSkillOpen} style={style} getSkills={getSkills}/>
