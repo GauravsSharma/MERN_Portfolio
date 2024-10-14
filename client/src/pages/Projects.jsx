@@ -7,7 +7,7 @@ import {Toaster} from "react-hot-toast"
 import { AuthContext } from '../components/Layout';
 import axios  from 'axios';
 import CardLoader from '../components/loaders/CardLoader';
-axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
+axios.defaults.baseURL = 'https://mern-portfolio-three.vercel.app/api/v1';
 const Projects = () => {
   const [isDialogBocOpen,setIsDialogBoxOpen] = useState(false);
   const [projects, setProjects] = useState([]);

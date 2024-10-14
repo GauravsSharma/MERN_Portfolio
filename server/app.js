@@ -11,8 +11,6 @@ require('dotenv').config({ path: './config/config.env' });
 
 const corsOptions = {
     origin: 'https://gaurav-sharma-mern-portfolio.netlify.app', // allow requests from this domain
-    credentials: true,
-    optionsSuccessStatus: 200,
 };
 connectDatabase()
 

@@ -6,7 +6,7 @@ import axios from 'axios';
 import {Toaster} from "react-hot-toast"
 import { AuthContext } from './Layout';
 import CardLoader from './loaders/CardLoader';
-axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
+axios.defaults.baseURL = 'https://mern-portfolio-three.vercel.app/api/v1';
 const SkillSection = () => {
   const [isAddSkillOpen, setIsAddSkillOpen] = useState(false);
   const [loading, setLoading] = useState(false);
