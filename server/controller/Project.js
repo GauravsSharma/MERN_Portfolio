@@ -41,7 +41,7 @@ exports.getAllProjects = async (req, res) => {
         const skip = (page_no - 1) * limit;
 
         const projects = await Project.find().skip(skip).limit(limit);
-
+        project = projects.reverse();
         return res.status(200).json({
             success: true,
             projects,

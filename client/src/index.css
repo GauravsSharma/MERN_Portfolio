@@ -6,7 +6,13 @@
   font-family: "Poppins", sans-serif;
 }
 
-
+.fallback-image{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .padding {
   padding: 1vw 8vw;
 }

@@ -9,6 +9,7 @@ import axios from 'axios';
 import { AuthContext } from "../components/Layout"
 import toast from "react-hot-toast"
 import Loader from "./loaders/Loader";
+import FallbackImage from "./FallbackImage";
 axios.defaults.baseURL = 'https://mern-portfolio-3.onrender.com/api/v1';
 const ProjectCard = ({
     index,
@@ -24,7 +25,6 @@ const ProjectCard = ({
     setCurrentProject,
     getProjects,
 }) => {
-    console.log(thumbnail);
     const { user } = useContext(AuthContext)
     const [loading,setLoading] = useState(false)
     const handleOnClick = () => {
@@ -75,7 +75,7 @@ const ProjectCard = ({
             whileInView="animate"
             custom={index}
         >
-            <img src={thumbnail} alt="" />
+           {thumbnail ? <img src={thumbnail} alt="" />:<FallbackImage/>}
             <div className='project_info'>
                 <p className='project_title'>{title}</p>
                 <p className="project_dis">
