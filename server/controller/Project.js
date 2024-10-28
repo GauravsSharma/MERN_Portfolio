@@ -40,8 +40,7 @@ exports.getAllProjects = async (req, res) => {
         const limit = 6;
         const skip = (page_no - 1) * limit;
 
-        const projects = await Project.find().skip(skip).limit(limit);
-        project = projects.reverse();
+        const projects = await Project.find().skip(skip).limit(limit).sort({createdAt:-1})
         return res.status(200).json({
             success: true,
             projects,

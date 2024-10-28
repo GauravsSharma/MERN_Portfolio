@@ -24,6 +24,7 @@ const ProjectCard = ({
     id,
     setCurrentProject,
     getProjects,
+    setPage
 }) => {
     const { user } = useContext(AuthContext)
     const [loading,setLoading] = useState(false)
@@ -42,6 +43,7 @@ const ProjectCard = ({
     const deleteProject = async (id) => {
         try {
             setLoading(true)
+            setPage(1);
             const token = JSON.parse(localStorage.getItem("token"));
             if (!token) {
                 throw new Error("No token found");
@@ -57,7 +59,7 @@ const ProjectCard = ({
             toast.success("Project deleted successfully",{
                 position:"bottom-center"
             });
-            getProjects()
+            getProjects(true);
             console.log("Project deleted successfully:", data);
         } catch (error) {
             console.error("Error deleting project:", error);

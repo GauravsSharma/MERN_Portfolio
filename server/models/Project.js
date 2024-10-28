@@ -32,6 +32,6 @@ const projectSchema = new mongoose.Schema({
             ref: "User"
         }
     ],
-})
+},{timestamps:true})
 
 module.exports = mongoose.model("Project", projectSchema)

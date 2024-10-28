@@ -56,7 +56,7 @@ const Projects = () => {
     try {
       setLoading(true)
       const token = JSON.parse(localStorage.getItem("token"));
-      const { data } = await axios.get("/getprojects/:1", {
+      const { data } = await axios.get("/getprojects", {
         headers: {
           Authorization: `Bearer ${token}`
         }

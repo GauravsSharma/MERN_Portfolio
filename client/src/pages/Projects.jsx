@@ -29,16 +29,16 @@ const Projects = () => {
       }
     })
   }
-  const getProjects = async () => {
+  const getProjects = async (fromDelete = false) => {
     try {
-      setLoading(true);
+      setLoading(true);     
       const token = JSON.parse(localStorage.getItem("token"));
       const { data } = await axios.get(`/getprojects/${page}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      setProjects([...projects,...data.projects]);
+     fromDelete?setProjects(data.projects):setProjects([...projects,...data.projects]);
       setLoading(false);
       console.log(data.projects);
     } catch (error) {
@@ -46,8 +46,7 @@ const Projects = () => {
       console.log(error.message);
     }
   }
-  console.log(projects);
-  
+
   const handleLoadMore = ()=>{
     setPage(prev=>prev+1);
   }
@@ -84,6 +83,7 @@ const Projects = () => {
              setIsDialogBoxOpen={setIsDialogBoxOpen}
              setCurrentProject={setCurrentProject}
              getProjects={getProjects}
+             setPage = {setPage}
              />
           ))}
           {loading && <CardLoader/>}
