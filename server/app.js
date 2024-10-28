@@ -10,7 +10,7 @@ const skill = require("./routes/skill");
 require('dotenv').config({ path: './config/config.env' });
 
 const corsOptions = {
-    origin: ['https://gaurav-sharma-mern-portfolio.netlify.app','http://localhost:3000/'], // allow requests from this domain
+    origin: ['https://gaurav-sharma-mern-portfolio.netlify.app','http://localhost:3000'], // allow requests from this domain
 };
 connectDatabase()
 
